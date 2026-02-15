@@ -121,11 +121,18 @@ def update_hlevelint_file(reg_list: list[str]):
 
 	src_file.close()
 
-	os.chmod(hlevelint_dst, stat.S_IREAD | stat.S_IWRITE)	
+	if os.path.exists(hlevelint_dst):
+		os.chmod(hlevelint_dst, stat.S_IREAD | stat.S_IWRITE)
+
 	dst_file =  open(hlevelint_dst, "w")
 	dst_file.write (dst_text)
 	dst_file.close()
 	os.chmod(hlevelint_dst, stat.S_IREAD)	
+
+def remove_file (file_path):
+	if os.path.exists(file_path):
+		os.remove(file_path)		
+		print ("Removing: " + file_path)
 
 def clean_hli_targets():
 	print ("Cleaning hli targets")
@@ -134,9 +141,16 @@ def clean_hli_targets():
 	for cFile in cFileList:
 		ofile = os.path.splitext(cFile)[0] + ".S"
 		ofile = os.path.join (src_folder, ofile)
+		remove_file (ofile)
 		if os.path.exists(ofile):
 			os.remove(ofile)		
 			print ("Removing: " + ofile)
+
+	hlevelint_dst = os.path.join(src_folder, hlevelint_name)
+	os.chmod(hlevelint_dst, stat.S_IREAD | stat.S_IWRITE)
+	remove_file (hlevelint_dst)
+
+
 
 def build_hli_folder():
 

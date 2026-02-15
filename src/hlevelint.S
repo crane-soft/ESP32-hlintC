@@ -2,13 +2,9 @@
 // The file is read only. Do not try to edit this file.
 // Edit the original one in the hli-folder.
 #include <xtensa/coreasm.h>
-#include <xtensa/corebits.h>
-#include <xtensa/config/system.h>
 
     .data
     .space      128
-hli_stack:
-    .space      24
 hli_top_of_stack:
 
     .section .iram1,"ax"
@@ -32,7 +28,7 @@ xt_highint5:
 	s32i	a11,sp,12
 	// ----------------------
 
-	call0 	i2c_sniffer_itr
+	call0 	hlintC_main
 
 	// --- auto generated ---
 	l32i	a7,sp,0

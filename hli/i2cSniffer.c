@@ -126,7 +126,7 @@ void scl_event()
 }
 
 extern void eventa15_delay( volatile int deltime);
-void IRAM_ATTR i2c_sniffer_itr () 
+void IRAM_ATTR hlintC_main () 
 {
 	//eventa15_delay (10);
 	if ((READ_PERI_REG (SDA_STATUS_REG) & SDA_PIN_MASK) != 0) {

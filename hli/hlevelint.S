@@ -1,11 +1,7 @@
 #include <xtensa/coreasm.h>
-#include <xtensa/corebits.h>
-#include <xtensa/config/system.h>
 
     .data
     .space      128
-hli_stack:
-    .space      24
 hli_top_of_stack:
 
     .section .iram1,"ax"
@@ -23,7 +19,7 @@ xt_highint5:
 
 	// [REG_SAVE]			// from here compile_hli.py will insert all used registers to svae
 
-	call0 	i2c_sniffer_itr
+	call0 	hlintC_main
 
 	// [REG_RESTORE]
 
