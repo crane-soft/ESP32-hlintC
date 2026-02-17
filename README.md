@@ -9,6 +9,8 @@ A demo  [example](https://github.com/espressif/esp-idf/blob/v4.4.2/components/es
 This project demonstrates a way to write the interrupt service routine in C especially for the ESP-S3 using PlatformIO.
 The ESP-S3 is based on the Xtensa CPU core, which features a so-called [windowed register function](https://sachin0x18.github.io/posts/demystifying-xtensa-isa "windowed register function"). This makes it considerably more difficult to save the correct context and switch stacks without significantly increasing interrupt latency.
 
+<img width="400" height="316" alt="Xtensa_Customizable_Processors" src="https://github.com/user-attachments/assets/a912cb0c-0f64-4eae-af36-7710b131a2bc" />
+
 Therefore, I decided to switch off this feature for the Interrupt Service Routine, which makes things significantly easier.
 We can do this with the [Xtensa compiler option](https://softwarefreedom.sourceforge.io/gcc/Xtensa-Options.html "Xtensa compiler option") **-mabi=call0** 
 
@@ -16,6 +18,7 @@ However, we must take care not to call any C functions that were not compiled wi
 I think for a time critical interrupt service this is not a real limitation and definitely better than programming in assembler.
 
 My test board is a **[XIAO-ESP-S3](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/ "XIAO-ESP-S3")**, and my test application is an **I2C sniffer** that uses the GPIO interrupt to capture the I2C signals. 
+<img width="247" height="300" alt="xiaoesp32s3sm" src="https://github.com/user-attachments/assets/2ac27a65-c59b-402f-9813-0c620d12ebac" />
 
 
 ### How it works
