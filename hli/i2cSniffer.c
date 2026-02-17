@@ -30,7 +30,6 @@
 
 #define I2C_ADDR	0x5A
 
-
 i2c_data_t i2c_data; 
 
 inline void IRAM_ATTR restart() 
@@ -99,7 +98,7 @@ void IRAM_ATTR sda_event()
   	}
 }
 
-void scl_event()
+void IRAM_ATTR scl_event()
 {
    if (i2c_data.I2Cstate == 1) {
 		// read bit only if startbit detected
@@ -125,10 +124,9 @@ void scl_event()
     }
 }
 
-extern void eventa15_delay( volatile int deltime);
+
 void IRAM_ATTR hlintC_main () 
 {
-	//eventa15_delay (10);
 	if ((READ_PERI_REG (SDA_STATUS_REG) & SDA_PIN_MASK) != 0) {
 		WRITE_PERI_REG(SDA_STATUS_W1TC_REG,SDA_PIN_MASK);
 		sda_event();
